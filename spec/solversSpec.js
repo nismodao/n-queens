@@ -27,7 +27,7 @@ describe('solvers', function() {
         var solutionCount = countNRooksSolutions(n);
         var expectedSolutionCount = [1, 1, 2, 6, 24, 120, 720, 5040, 40320][n];
 
-        expect(solutionCount).to.be.equal(expectedSolutionCount);
+        expect(solutionCount[1]).to.be.equal(expectedSolutionCount);
       });
     });
 

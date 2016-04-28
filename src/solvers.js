@@ -17,10 +17,62 @@
 
 window.findNRooksSolution = function(n) {
 
+window.countNRooksSolutions = function(n,result) {
 
+  var solutionCount = [];
+  var pieces = _.range(n);
 
+  function makeBoard (n,result) {
 
+    if (n === 0) {
+      solutionCount.push(result);
+      return;
+    }
+
+    for (var i = 0; i < pieces.length; i++) {
+
+    if (result.indexOf(pieces[i]) === -1) makeBoard(n-1, result.concat(pieces[i]));
+    
+    }
+  
+
+    }
+
+    makeBoard(n,[]);
+    //console.log('Number of solutions for ' + n + ' rooks:', solutionCount.length);
+    return [solutionCount,solutionCount.length];  
 };
+
+  var test = countNRooksSolutions(n)[0][0];
+  var testBoard = [];
+
+  var buildChessBoard = function(test) {
+  if(test.length === 0) {
+    return;
+  }
+  var result = [];
+  for(var i = 0; i < test.length; i++) {
+    if(result.length === 0) { 
+      result[test[i]] = 1;
+    }
+  }
+  for(var i = 0; i < test.length; i++) {
+    if(result[i] === undefined) {
+      result[i] = 0;
+    }
+    if(test >= 1) {
+      result.push(0);
+    }
+  }
+  testBoard.push(result);
+  buildChessBoard(test.slice(1))
+  
+};
+buildChessBoard(test);
+console.log('Single solution for ' + n + ' rooks:', JSON.stringify(testBoard));
+  return testBoard;
+};
+
 
  
 
